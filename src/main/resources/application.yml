@@ -21,16 +21,4 @@ spring:
         locator:
           lower-case-service-id: true
           enabled: true
-      routes:
-      - id: user
-        uri: lb://user-service
-        predicates:
-        - Path=/user-service/**
-        filters:
-        - RewritePath=/user-service(?<segment>/?.*), $\{segment}
-      - id: WebSocketModule
-        uri: lb://WS-SERVICE
-        predicates:
-        - Path=/ws-service/**
-        filters:
-        - RewritePath=/ws-service(?<segment>/?.*), $\{segment}
+
