@@ -30,6 +30,7 @@ public class JwtAuthFilter implements GatewayFilter {
 
 	@Override
 	public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+		System.out.println("Calling filter()");
 		ServerHttpRequest request = (ServerHttpRequest) exchange.getRequest();
 
 		final List<String> apiEndpoints = List.of("/register", "/login");

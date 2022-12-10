@@ -17,11 +17,22 @@ spring:
     name: gateway-service
   cloud:
     gateway:
+      httpclient:
+        pool:
+          maxIdleTime: 10s
       discovery:
         locator:
           lower-case-service-id: true
           enabled: true
+        
   main:
     web-application-type: reactive
     allow-bean-definition-overriding: true
 
+user-service:
+  client-id: user1
+  client-secret: pass1
+
+ws-service:
+  client-id: userws
+  client-secret: passws
