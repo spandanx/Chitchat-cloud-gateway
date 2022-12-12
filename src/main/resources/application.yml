@@ -36,3 +36,7 @@ user-service:
 ws-service:
   client-id: userws
   client-secret: passws
+
+jwt:
+  secret: secret1_
+  expiry_in_hour: 8760

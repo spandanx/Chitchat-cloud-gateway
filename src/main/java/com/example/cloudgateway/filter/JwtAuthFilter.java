@@ -1,11 +1,13 @@
 package com.example.cloudgateway.filter;
 
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
@@ -75,8 +77,12 @@ public class JwtAuthFilter implements GatewayFilter {
 				return response.setComplete();
 			}
 
-			Claims claims = jwtUtil.getClaims(token);
-			exchange.getRequest().mutate().header("id", String.valueOf(claims.get("id"))).build();
+//			Claims claims = jwtUtil.getClaims(token);
+//			exchange.getRequest().mutate().header("id", String.valueOf(claims.get("id"))).build();
+//			exchange.getRequest().mutate().;
+//			HttpHeaders headers = exchange.getRequest().getHeaders();
+//			Consumer<HttpHeaders> headerConsumer = null;
+//			exchange.getRequest().mutate().headers(headerConsumer);
 		}
 
 		return chain.filter(exchange);

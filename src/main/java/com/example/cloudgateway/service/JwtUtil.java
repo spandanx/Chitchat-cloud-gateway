@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import org.springframework.beans.factory.annotation.Value;
 //import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,11 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Service
 public class JwtUtil {
 
-    private String secret = "secret0_";
+	@Value("${jwt.secret}")
+    private String secret;
+	
+	@Value("${jwt.expiry_in_hour}")
+    private long expiry_in_hour;
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -47,7 +52,7 @@ public class JwtUtil {
 
     	Map<String, String> response = new HashMap<>();
     	
-    	Date expiry = new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10);
+    	Date expiry = new Date(System.currentTimeMillis() + 1000 * 60 * 60 * expiry_in_hour);
     	
     	String token = Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(expiry)

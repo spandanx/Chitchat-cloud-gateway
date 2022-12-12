@@ -56,7 +56,7 @@ public class CloudGatewayConfig {
 	public RouteLocator routes(RouteLocatorBuilder builder) {
 		
 		return builder.routes()
-				.route("user", r -> r.path("/user-service/**").filters(f -> f.filter(filter).addRequestHeader("Authorization", encodeCreds(userClientId, userClientSecret)).rewritePath("/user-service(?<segment>/?.*)", "$\\{segment}")).uri("lb://user-service"))
+				.route("user", r -> r.path("/user-service/**").filters(f -> f.filter(filter).removeRequestHeader("Authorization").addRequestHeader("Authorization", encodeCreds(userClientId, userClientSecret)).rewritePath("/user-service(?<segment>/?.*)", "$\\{segment}")).uri("lb://user-service"))
 				.route("WebSocketModule", r -> r.path("/ws-service/**").filters(f -> f.addRequestHeader("Authorization", encodeCreds(wsClientId, wsClientSecret)).rewritePath("/ws-service(?<segment>/?.*)", "$\\{segment}")).uri("lb://ws-service"))
 				.build();
 	}
